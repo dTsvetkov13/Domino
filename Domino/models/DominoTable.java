@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class DominoTable
 {
+	public final static int MAX_TILES_COUNT = 28;
+	
 	private ArrayList<DominoTile> tiles;
 	
 	public DominoTable()
@@ -16,6 +18,11 @@ public class DominoTable
 		if(dominoTile == null)
 		{
 			throw new RuntimeException("DominoTile is null");
+		}
+		
+		if(this.tiles.size() > MAX_TILES_COUNT)
+		{
+			throw new RuntimeException("The table is full");
 		}
 		
 		if(tiles.size() > 0)
@@ -42,6 +49,11 @@ public class DominoTable
 		if(dominoTile == null)
 		{
 			throw new RuntimeException("DominoTile is null");
+		}
+		
+		if(this.tiles.size() > MAX_TILES_COUNT)
+		{
+			throw new RuntimeException("The table is full");
 		}
 		
 		if(tiles.size() > 0)
