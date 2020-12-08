@@ -7,10 +7,19 @@ public class DominoTable
 	public final static int MAX_TILES_COUNT = 28;
 	
 	private ArrayList<DominoTile> tiles;
+	private TableEventListener eventListener;
 	
 	public DominoTable()
 	{
 		this.tiles = new ArrayList<DominoTile>();
+	}
+	
+	public void addTableEventListener(TableEventListener listener)
+	{
+		if(listener != null)
+		{
+			this.eventListener = listener;
+		}
 	}
 	
 	public boolean addLeft(DominoTile dominoTile)
@@ -29,6 +38,7 @@ public class DominoTable
 		{
 			if(tiles.get(0).getLeftValue() == dominoTile.getRightValue())
 			{
+				callOnTableChanged();
 				tiles.add(0, dominoTile);
 				return true;
 			}
@@ -40,7 +50,16 @@ public class DominoTable
 		else
 		{
 			tiles.add(dominoTile);
+			callOnTableChanged();
 			return true;
+		}
+	}
+	
+	private void callOnTableChanged()
+	{
+		if(this.eventListener != null)
+		{
+			this.eventListener.onTableChanged(this);	
 		}
 	}
 	
@@ -61,6 +80,7 @@ public class DominoTable
 			if(tiles.get(tiles.size() - 1).getRightValue() == dominoTile.getLeftValue())
 			{
 				tiles.add(dominoTile);
+				callOnTableChanged();
 				return true;
 			}
 			else
@@ -71,6 +91,7 @@ public class DominoTable
 		else
 		{
 			tiles.add(dominoTile);
+			callOnTableChanged();
 			return true;
 		}
 	}
@@ -81,5 +102,10 @@ public class DominoTable
 		{
 			System.out.println(tiles.get(i).toString());
 		}
+	}
+	
+	public ArrayList<DominoTile> getTiles()
+	{
+		return this.tiles;
 	}
 }
