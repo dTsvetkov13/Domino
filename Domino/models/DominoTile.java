@@ -91,7 +91,7 @@ public class DominoTile
 		return stringBuilder.toString();
 	}
 	
-	private StringBuilder appendLineByValue(StringBuilder stringBuilder, int stars, LineType lineType)
+	private static StringBuilder appendLineByValue(StringBuilder stringBuilder, int stars, LineType lineType)
 	{
 		if(stringBuilder == null)
 		{
@@ -134,6 +134,35 @@ public class DominoTile
 			stringBuilder.append("   ");
 		}
 		return stringBuilder; 
+	}
+	
+	public static boolean[][] getDotsOf(int number)
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+		appendLineByValue(stringBuilder, number / 2, LineType.Upper);
+		appendLineByValue(stringBuilder,
+				  number == 6 ? 2 : number % 2,
+				  LineType.Middle);
+		appendLineByValue(stringBuilder, number / 2, LineType.Bottom);
+		
+		boolean[][] result = new boolean[3][3];
+		
+		char[] temp = stringBuilder.toString().toCharArray();
+		int rowIndex = -1;
+		int columnIndex = 0;
+		
+		for(int i = 0; i < temp.length; i++)
+		{
+			if(i % 3 == 0)
+			{
+				rowIndex++;
+				columnIndex = 0;
+			}
+			result[rowIndex][columnIndex] = (temp[i] == '*');
+			columnIndex++;
+		}
+		
+		return result;
 	}
 	
 	public boolean equals(DominoTile otherTile)
