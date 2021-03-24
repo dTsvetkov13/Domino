@@ -1,4 +1,4 @@
-package oop.classes.Domino.enums;
+package enums;
 
 public enum LineType
 {

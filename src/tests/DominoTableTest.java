@@ -1,7 +1,7 @@
-package oop.classes.Domino.tests;
+package tests;
 
-import oop.classes.Domino.models.DominoTable;
-import oop.classes.Domino.models.DominoTile;
+import models.DominoTable;
+import models.DominoTile;
 
 public class DominoTableTest
 {

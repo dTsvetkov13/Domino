@@ -1,4 +1,4 @@
-package oop.classes.Domino.models;
+package models;
 
 import java.util.ArrayList;
 

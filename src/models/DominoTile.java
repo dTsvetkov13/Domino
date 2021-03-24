@@ -1,6 +1,6 @@
-package oop.classes.Domino.models;
+package models;
 
-import oop.classes.Domino.enums.LineType;
+import enums.LineType;
 
 public class DominoTile
 {
