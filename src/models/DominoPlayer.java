@@ -1,21 +1,19 @@
 package models;
 
-import models.DominoTable;
-import models.DominoTile;
+import structures.LinkedList;
 
 public class DominoPlayer
 {
 	public final static int ERROR_CODE = -1;
 	
 	private String nickname;
-	private DominoTile[] tiles;
-	private int tilesInHands;
+	private LinkedList<DominoTile> tiles;
 	private DominoTable table;
 	
 	public DominoPlayer(String nickname, int size, DominoTable table)
 	{
 		this.setNickname(nickname);
-		tiles = new DominoTile[size];
+		tiles = new LinkedList<DominoTile>();
 		this.setDominoTable(table);
 	}
 	
@@ -51,9 +49,9 @@ public class DominoPlayer
 	
 	public int getTileIndex(DominoTile tile)
 	{
-		for(int i = 0; i < this.tilesInHands; i++)
+		for(int i = 0; i < this.tiles.size(); i++)
 		{
-			if(this.tiles[i].equals(tile))
+			if(this.tiles.get(i).equals(tile))
 			{
 				return i;
 			}
@@ -88,17 +86,11 @@ public class DominoPlayer
 	
 	private void removeTileAt(int index)
 	{
-		if(index >= this.tilesInHands)
+		if(index >= this.tiles.size())
 		{
 			throw new RuntimeException("Invalid index");
 		}
 		
-		for(int i = index; i < this.tilesInHands - 1; i++)
-		{
-			this.tiles[i] = this.tiles[i + 1];
-		}
-		
-		this.tiles[this.tilesInHands - 1] = null;
-		this.tilesInHands--;
+		this.tiles.removeFrom(index);
 	}
 }
